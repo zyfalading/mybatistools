@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 连接的数据库对应的驱动包。并且驱动包必须和generatorConfig.xml放在同一个目录下 -->
+    <context id="MySQL" targetRuntime="Mybatis3">
+        <!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+        <!-- 生成的pojo，将implements Serializable -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.LombokPlugin" >
+            <property name="hasLombok" value="true"/>
+        </plugin>
+        <!-- 这里的type里写的是你的实现类的类全路径 -->
+        <commentGenerator >
+            <property name="javaFileEncoding" value="UTF-8"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="true"/>
+
+        </commentGenerator>
+
+        <!-- 需要注意数据库名称是否对应 ， 用户名密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.105.71.236:3306/dolltribe?characterEncoding=utf8" userId="dev"
+                        password="dev135qet." />
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--  反向生成后实体类所在的包 targetProject：生成的代码存放到哪个文件夹中，并且必须提前创建好-->
+        <javaModelGenerator targetPackage="com.tribe.entity"
+                            targetProject=".\src\main\java" >
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        
+
+        <!--  mapper映射文件   xml文件 -->
+        <sqlMapGenerator targetPackage="com.tribe.service.mapper" targetProject=".\src\main\resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!--  java的接口 -->
+        <javaClientGenerator targetPackage="com.tribe.dao.mapper"
+                             targetProject=".\src\main\java" type="XMLMAPPER" >
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!-- 对哪个表反向生成
+            tableName=”表名“
+            domainObjectName=”表对应的实体类名“
+        -->
+        <table schema="dolltribe" tableName="r_seckill_stocks" domainObjectName="SeckillStocks"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table schema="dolltribe" tableName="r_seckill_time" domainObjectName="SeckillTime"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table schema="dolltribe" tableName="r_seckill_record" domainObjectName="SeckillRecord"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+      </context>
+</generatorConfiguration>
